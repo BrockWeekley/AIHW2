@@ -6,6 +6,7 @@ if __name__ == '__main__':
     squares = json.load(inputFile)['squares']
     startingRow = 0
     startingCol = 0
+    actionCost = 0
 
     rowNum = 0
     colNum = 0
