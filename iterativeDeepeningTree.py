@@ -51,7 +51,6 @@ if __name__ == '__main__':
 
     while any(1 in square for square in squares):
         i = 0
-        print(numberOfExpansions)
         while i < numberOfExpansions:
             currentNode = fringe.pop(0)
             expandedNodes += 1
@@ -61,8 +60,13 @@ if __name__ == '__main__':
 
             if currentNode.status == 1:
                 squares[currentNode.location_row][currentNode.location_col] = 0
-                for row in squares:
-                    print(row)
+                if not any(1 in square for square in squares):
+                    for row in squares:
+                        print(row)
+                    print('Expanded Nodes: ' + str(expandedNodes) + ' Depth Searched: ' + str(depth))
+                    print('Success')
+                    exit(0)
+
                 fringe.append(Node(currentNode.location_row,
                                    currentNode.location_col,
                                    currentNode.cost + action_suck,
@@ -94,11 +98,8 @@ if __name__ == '__main__':
                                    squares[currentNode.location_row][currentNode.location_col + 1]
                                    ))
 
-            if not any(1 in square for square in squares):
-                print('Expanded Nodes: ' + str(expandedNodes))
-
             i += 1
-        depth = 1
+        depth += 1
         numberOfExpansions = len(fringe) + 1
         fringe = [Node(startingRow, startingCol, 0, 0)]
 
