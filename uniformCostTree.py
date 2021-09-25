@@ -74,7 +74,7 @@ if __name__ == '__main__':
             for row in squares:
                 print(row)
             if not any(1 in square for square in squares):
-                print('Total Cost: ' + str(currentNode.cost / 10) + ' Expanded Nodes: ' + str(expandedNodes))
+                print('Expanded Nodes: ' + str(expandedNodes))
                 print('Success')
                 exit(0)
             fringe.append(Node(currentNode.location_row,
