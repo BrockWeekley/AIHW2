@@ -2,6 +2,7 @@ import json
 
 # First five expanded nodes, instance one: (2, 2), (3, 2), (1, 2), (2, 3), (2, 1)
 # First five expanded nodes, instance two: (3, 2), (4, 2), (2, 2), (3, 3), (3, 1)
+
 action_left = 10
 action_right = 9
 action_up = 8
@@ -24,7 +25,7 @@ class Node(object):
 
 if __name__ == '__main__':
     print('Uniform Cost Tree')
-    inputFile = open('instanceTwo.json')
+    inputFile = open('instanceOne.json')
     squares = json.load(inputFile)['squares']
     startingRow = 0
     startingCol = 0
@@ -51,6 +52,7 @@ if __name__ == '__main__':
     colNum = len(squares[0])
     currentRow = 0
     currentCol = 0
+    expandedNodes = 0
 
     while len(fringe) > 0:
         i = 0
@@ -62,6 +64,7 @@ if __name__ == '__main__':
             previousNode = node
             i += 1
         currentNode = fringe.pop(lowestNode)
+        expandedNodes += 1
 
         print('Expanded Node: ' + '(' + str(currentNode.location_row + 1) + ', ' + str(currentNode.location_col + 1) +
               ') Cost: ' + str(currentNode.cost) + ' Status: ' + str(currentNode.status))
@@ -71,7 +74,7 @@ if __name__ == '__main__':
             for row in squares:
                 print(row)
             if not any(1 in square for square in squares):
-                print('Total Cost: ' + str(currentNode.cost / 10))
+                print('Total Cost: ' + str(currentNode.cost / 10) + ' Expanded Nodes: ' + str(expandedNodes))
                 print('Success')
                 exit(0)
             fringe.append(Node(currentNode.location_row,
